@@ -1,0 +1,35 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12  mb-3" *ngIf="_tournament.start">
+      <button class="btn btn-danger mt-1 w-100" (click)="cancelTournament()">
+        Cancel Tournament
+      </button>
+    </div>
+    <div class="col-3" *ngIf='!_tournament.start'>
+      <app-teams [tournament]='_tournament'></app-teams>
+    </div>
+    <div class="{{_tournament.start ? 'col-12 rounds' : 'col rounds'}}">
+      <div *ngFor="let round of _tournament.rounds" class="round">
+        <div *ngFor="let battle of round.battles.sort(sortOrder)" class="battle">
+          <div class="my-2 w-100 btn-group-vertical">
+            <button class="btn w-100"
+            [class]="isWinner(round, battle, battle.team_1) ? 'btn-warning' : 'btn-secondary'"
+            (click)="setWinner(round, battle, 'team_1')">
+              <span>{{battle.team_1?.name ? battle.team_1?.name : '-'}}</span>
+              <mat-icon *ngIf='isWinner(round, battle, battle.team_1)'>emoji_events</mat-icon>
+            </button>
+            <button
+            *ngIf='!round?.roundWinner'
+            class="btn w-100"
+            [class]="isWinner(round, battle, battle.team_2) ? 'btn-warning' : 'btn-secondary'"
+            (click)="setWinner(round, battle, 'team_2')">
+              <span>{{battle.team_2?.name ? battle.team_2?.name : '-'}}</span>
+              <mat-icon *ngIf='isWinner(round, battle, battle.team_2)'>emoji_events</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

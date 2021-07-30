@@ -1,0 +1,20 @@
+.rounds{
+  display: flex
+}
+.round{
+  display: grid;
+  margin-left: 10px;
+}
+.round:first-child{
+  margin-left: 0;
+}
+.battle{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.battle button{
+  display: flex;
+}
+.battle button span{
+  width: 100px;
+}
